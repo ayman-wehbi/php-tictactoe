@@ -22,7 +22,7 @@ A web-based Tic Tac Toe game built with PHP, HTML, CSS (MaterializeCSS), and MyS
 1. **Clone the repository:**
 
     ```bash
-    git clone https://github.com/yourusername/tic-tac-toe.git
+    git clone https://github.com/ayman-wehbi/php-tictactoe.git
     cd tic-tac-toe
     ```
 
@@ -80,14 +80,6 @@ A web-based Tic Tac Toe game built with PHP, HTML, CSS (MaterializeCSS), and MyS
     - Click on the cells to play Tic Tac Toe.
     - The win counters will update based on the game results.
     - Use the reset button to start a new game.
-
-## Contributing
-
-Feel free to contribute to this project by submitting a pull request or opening an issue on GitHub.
-
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ## Acknowledgments
 
