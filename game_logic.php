@@ -1,31 +1,52 @@
 <?php
 session_start();
 
+if (!isset($_SESSION['x_wins'])) {
+    $_SESSION['x_wins'] = 0;
+}
+
+if (!isset($_SESSION['o_wins'])) {
+    $_SESSION['o_wins'] = 0;
+}
+
 if (isset($_POST['reset'])) {
     $_SESSION['board'] = array_fill(0, 9, '');
     $_SESSION['turn'] = 'X';
+    $_SESSION['message'] = '';
     header("Location: index.php");
     exit();
 }
 
+if (!isset($_SESSION['board'])) {
+    $_SESSION['board'] = array_fill(0, 9, '');
+    $_SESSION['turn'] = 'X';
+    $_SESSION['message'] = '';
+}
+
 $board = &$_SESSION['board'];
 $turn = &$_SESSION['turn'];
+$message = &$_SESSION['message'];
 
-for ($i = 0; $i < 9; $i++) {
-    if (isset($_POST["cell$i"]) && $board[$i] == '') {
-        $board[$i] = $turn;
-        $turn = $turn == 'X' ? 'O' : 'X';
-        break;
+if (isset($_POST)) {
+    for ($i = 0; $i < 9; $i++) {
+        if (isset($_POST["cell$i"]) && $board[$i] == '' && $message == '') {
+            $board[$i] = $turn;
+            $turn = $turn == 'X' ? 'O' : 'X';
+            break;
+        }
     }
 }
 
 $winner = checkWinner($board);
 if ($winner) {
-    echo "<h2>Player $winner wins!</h2>";
-    $_SESSION['board'] = array_fill(0, 9, '');
-} elseif (!in_array('', $board)) {
-    echo "<h2>It's a draw!</h2>";
-    $_SESSION['board'] = array_fill(0, 9, '');
+    $message = "Player $winner wins!";
+    if ($winner == 'X') {
+        $_SESSION['x_wins'] += 1;
+    } else {
+        $_SESSION['o_wins'] += 1;
+    }
+} elseif (!in_array('', $board) && $message == '') {
+    $message = "It's a draw!";
 }
 
 header("Location: index.php");
